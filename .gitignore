@@ -1,0 +1,5 @@
+**/bin
+**/obj
+**/wwwroot
+.idea
+**/.idea
