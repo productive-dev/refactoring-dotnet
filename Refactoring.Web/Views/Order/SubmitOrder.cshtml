@@ -12,12 +12,12 @@
         <li>District: @Model.District</li>
         <li>Created: @Model.CreatedOn</li>
     </ul>
-    <h3>Attached Flier:</h3>
+    <h3>Attached Flyer:</h3>
     <ul>
         <li>@Model.Advert.Heading</li>
         <li>@Model.Advert.Content</li>
         @if (!String.IsNullOrWhiteSpace(Model.Advert.ImageUrl)) {
-            <li>@Model.Advert.ImageUrl</li>
+            <img src="@Model.Advert.ImageUrl" />
         }
     </ul>
 </div>
