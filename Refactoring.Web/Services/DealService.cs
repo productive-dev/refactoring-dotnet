@@ -1,25 +1,16 @@
 using System;
-using System.Collections.Generic;
+using Refactoring.Web.Services.Interfaces;
 
 namespace Refactoring.Web.Services {
-    public class DealService {
-        public DealService() { }
-        
-        public decimal GenerateDeal(DateTime dateTime) {
-            if (dateTime.Hour > 12 && dateTime.Hour < 24) {
-                return 0.1M;
-            } else {
-                return 0.05M;
-            }
-        }
+    public class DealService : IDealService {
+        public static decimal PmRate => 0.1M;
+        public static decimal AmRate => 0.05M;
 
-        public string GetRandomLocalBusiness() {
-            var lbs = new List<string> {
-                "Barbershop", "Bakery", "Shoe Store", "Pizza Place", "Diner", "Auto Repair", "Pharmacy", "Grocery", "Bakery"
-            };
-            var random = new Random();
-            var idx = random.Next(lbs.Count);
-            return lbs[idx];
-        }
+        public decimal GenerateDeal(DateTime dateTime) 
+            => IsAfternoon(dateTime) ? PmRate : AmRate;
+
+        private static bool IsAfternoon(DateTime dateTime) 
+            => dateTime.Hour > 12 
+               && dateTime.Hour < 24;
     }
 }

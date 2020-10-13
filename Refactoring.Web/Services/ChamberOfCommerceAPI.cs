@@ -1,24 +1,39 @@
-using System.Collections.Generic;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Refactoring.Web.Services.Helpers;
+using Refactoring.Web.Services.Interfaces;
 
 namespace Refactoring.Web.Services {
-    public static class ChamberOfCommerceApi {
-        public static async Task<DataResult> GetFor(string district) {
-            var client = new HttpClient();
-            var districtLookup = new Dictionary<string, int>() {
-                {"downtown", 11},
-                {"county", 23},
-                {"middleton", 18},
-                {"cambridge", 42}
-            };
-            var request = new HttpRequestMessage(HttpMethod.Get,
-                $"https://jsonplaceholder.typicode.com/photos/{districtLookup[district.ToLower()].ToString()}");
+    public class ChamberOfCommerceApi : IChamberOfCommerceApi {
+        private readonly IConfiguration _config;
+
+        public ChamberOfCommerceApi(IConfiguration config) {
+            _config = config;
+        }
+        
+        /// <summary>
+        /// For the provided `district` returns the `DataResult` object containing
+        /// the id, thumbnail url, and title for the district's image
+        /// </summary>
+        /// <param name="district"></param>
+        /// <returns></returns>
+        public async Task<DataResult> GetImageAndThumbnailDataFor(string district) {
+            using var client = new HttpClient();
+            var absoluteUrl = BuildUrlForDistrict(district);
+            var request = new HttpRequestMessage(HttpMethod.Get, absoluteUrl);
             var response = client.SendAsync(request);
             var data = await response.Result.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<DataResult>(data);
             return result;
+        }
+
+        private Uri BuildUrlForDistrict(string district) {
+            var districtId = District.GetDistrictNumberByName(district);
+            var basePhotoUrl = new Uri(_config.GetValue<string>("BasePhotoUrl"));
+            return new Uri(basePhotoUrl, districtId.ToString());
         }
     }
 
