@@ -4,7 +4,7 @@ An example project demonstrating cleaning up legacy code in a .NET Core MVC proj
 
 This repository was created for the Productive Dev YouTube series (TODO: link) on refactoring legacy code.
 
-__Key concepts__:
+## Key concepts
 
 - Improving testability
 - Inversion of control via dependency injection
@@ -21,7 +21,7 @@ __Key concepts__:
 - Monitoring code quality using static code analysis
 - Creating a continuous integration loop
 
-__To Follow along via YouTube series__:
+## To Follow along via YouTube series
 The `main` branch contains the result of refactoring the legacy code.  The `legacy_code` branch contains the starting point of the project, from where the refactoring begins.
 
 - Clone the repository
