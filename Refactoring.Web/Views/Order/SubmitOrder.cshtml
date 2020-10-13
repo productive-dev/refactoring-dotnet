@@ -1,0 +1,23 @@
+@model Refactoring.Web.DomainModels.Order 
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Order Complete! (@Model.Id)</h2>
+<div>
+    <h3>Summary :</h3>
+    <ul>
+        <li>District: @Model.District</li>
+        <li>Created: @Model.CreatedOn</li>
+    </ul>
+    <h3>Attached Flyer:</h3>
+    <ul>
+        <li>@Model.Advert.Heading</li>
+        <li>@Model.Advert.Content</li>
+        @if (!String.IsNullOrWhiteSpace(Model.Advert.ImageUrl)) {
+            <img src="@Model.Advert.ImageUrl" />
+        }
+    </ul>
+</div>

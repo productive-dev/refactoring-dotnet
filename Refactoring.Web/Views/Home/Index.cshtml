@@ -1,0 +1,25 @@
+﻿@model OrderFormModel;
+
+@{
+    ViewData["Title"] = "Order Form";
+}
+
+@using (Html.BeginForm("SubmitOrder", "Order", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.ValidationSummary(true)
+    <h1>Order Form</h1>
+    <div class="form-section">
+        <h2 class="form-heading">District</h2>
+        <div>
+            @Html.DropDownListFor(m => m.SelectedDistrict, Model.Districts, "Select District")
+        </div>
+    </div>
+    
+    <div class="form-section">
+        <h2 class="form-heading">Order Amount (USD)</h2>
+        <div>
+            @Html.TextBoxFor(m => m.OrderAmount)
+        </div>
+    </div>
+    
+    <input type="submit" value="Submit Order" />
+}
