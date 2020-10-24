@@ -2,7 +2,7 @@
 
 An example project demonstrating cleaning up legacy code in a .NET Core MVC project
 
-This repository was created for the Productive Dev YouTube series (TODO: link) on refactoring legacy code.
+This repository was created for the Productive Dev YouTube series on refactoring legacy code ([here's the link](https://www.youtube.com/watch?v=uj0RWP3DdUo&list=PL3_YUnRN3Uhh8H3Zw2M6KDdP3aAlbfT8j)). 
 
 ## Key concepts
 
